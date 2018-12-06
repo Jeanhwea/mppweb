@@ -35,16 +35,23 @@
     <dependency>
       <groupId>net.stixar</groupId>
       <artifactId>stixar-graphlib</artifactId>
-      <version>0.988</version>
+      <version>988</version>
       <scope>system</scope>
       <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/stixar-graphlib-988-beta.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>net.stixar</groupId>
       <artifactId>stixar-util</artifactId>
-      <version>0.950</version>
+      <version>950</version>
       <scope>system</scope>
       <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/stixar-util-950-beta.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.rtfparserkir</groupId>
+      <artifactId>rtfparserkir</artifactId>
+      <version>1.2.0</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/rtfparserkit-1.2.0.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
