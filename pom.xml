@@ -9,6 +9,44 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.mpxj</groupId>
+      <artifactId>mpxj</artifactId>
+      <version>4.7.5</version>
+    </dependency>
+
+    <!-- local repository -->
+    <dependency>
+      <groupId>net.stixar</groupId>
+      <artifactId>stixar-graphlib</artifactId>
+      <version>0.988</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/stixar-graphlib-988-beta.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>net.stixar</groupId>
+      <artifactId>stixar-util</artifactId>
+      <version>0.950</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/stixar-util-950-beta.jar</systemPath>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
@@ -17,5 +55,12 @@
   </dependencies>
   <build>
     <finalName>mpp</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+      </plugin>
+    </plugins>
   </build>
 </project>
