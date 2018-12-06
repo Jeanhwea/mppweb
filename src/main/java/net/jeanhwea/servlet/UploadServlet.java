@@ -19,7 +19,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 /**
  * Servlet implementation class UploadServlet
  */
-@WebServlet("/mpp/UploadServlet")
+@WebServlet("/UploadServlet")
 public class UploadServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private String UPLOAD_DIRECTORY = "F:/HuJinghui/eclipse/workspace/mpp/WebContent/upload";
