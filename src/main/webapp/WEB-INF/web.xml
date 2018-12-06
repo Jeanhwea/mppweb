@@ -4,4 +4,32 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>PerformServlet</servlet-name>
+    <servlet-class>net.jeanhwea.servlet.PerformServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PerformServlet</servlet-name>
+    <url-pattern>/PerformServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>net.jeanhwea.servlet.UploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/UploadServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SolutionServlet</servlet-name>
+    <servlet-class>net.jeanhwea.servlet.SolutionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SolutionServlet</servlet-name>
+    <url-pattern>/SolutionServlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>
