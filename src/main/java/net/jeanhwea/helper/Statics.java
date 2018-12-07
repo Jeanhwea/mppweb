@@ -20,6 +20,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import net.jeanhwea.ds.MyTask;
+import org.apache.commons.configuration.PropertiesConfiguration;
 
 public class Statics {
   private float[][]   duration;
@@ -34,7 +35,8 @@ public class Statics {
 
   String path_to_output = "F:/HuJinghui/eclipse/output.txt";
   String path_to_result = "F:/HuJinghui/eclipse/result.txt";
-  String path_to_xml    = "F:/HuJinghui/eclipse/workspace/mpp/WebContent/upload/";
+  String path_to_xml    = null;
+
 
   private DocumentBuilderFactory doc_builder_factory;
   private DocumentBuilder doc_builder;
@@ -45,12 +47,24 @@ public class Statics {
 
   public Statics(String xml_filename)
   {
-    path_to_output = path_to_output.replace('/', File.separatorChar);
-    path_to_result = path_to_result.replace('/', File.separatorChar);
-    path_to_xml = path_to_xml.replace('/', File.separatorChar) + xml_filename;
+    this.getProps();
+    path_to_output += File.separatorChar + "output.txt";
+    path_to_result += File.separatorChar + "result.txt";
+    path_to_xml += File.separatorChar + xml_filename;
     npop = 200;
     ngen = 100;
-    //System.out.println(xml_filename);
+  }
+
+  private void getProps()
+  {
+    try {
+      PropertiesConfiguration config = new PropertiesConfiguration("app.properties");
+      path_to_xml = config.getString("app.upload.dir").replace('/', File.separatorChar);
+      path_to_output = config.getString("app.tmp.dir").replace('/', File.separatorChar);
+      path_to_result = path_to_result.replace('/', File.separatorChar);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 
   void loadDuration()

@@ -16,13 +16,16 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
+
 /**
  * Servlet implementation class UploadServlet
  */
 @WebServlet("/UploadServlet")
 public class UploadServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  private String UPLOAD_DIRECTORY = "F:/HuJinghui/eclipse/workspace/mpp/WebContent/upload";
+  private String uploadDir = null;
+  private String psbpmTool = null;
 
   /**
    * @see HttpServlet#HttpServlet()
@@ -30,7 +33,18 @@ public class UploadServlet extends HttpServlet {
   public UploadServlet()
   {
     super();
-    UPLOAD_DIRECTORY = UPLOAD_DIRECTORY.replace('/', File.separatorChar);
+    this.getProps();
+  }
+
+  private void getProps()
+  {
+    try {
+      PropertiesConfiguration config = new PropertiesConfiguration("app.properties");
+      uploadDir = config.getString("app.upload.dir").replace('/', File.separatorChar);
+      psbpmTool = config.getString("app.psbpm").replace('/', File.separatorChar);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 
   /**
@@ -48,7 +62,6 @@ public class UploadServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
-
     //process only if its multipart content
     if(ServletFileUpload.isMultipartContent(request)){
       try {
@@ -61,7 +74,7 @@ public class UploadServlet extends HttpServlet {
         for(FileItem item : multiparts){
           if(!item.isFormField()){
             name = new File(item.getName()).getName();
-            File des_file = new File(UPLOAD_DIRECTORY + File.separator + name);
+            File des_file = new File(uploadDir + File.separator + name);
             item.write(des_file);
             full_filename = des_file.getAbsolutePath();
           }
@@ -73,9 +86,9 @@ public class UploadServlet extends HttpServlet {
         MPPParser parser = new MPPParser();
         if (full_filename != null) {
           System.out.println(System.getProperty("user.dir"));
-          parser.startWithCMD(full_filename, UPLOAD_DIRECTORY);
+          parser.startWithCMD(full_filename, uploadDir);
           String cmd;
-          cmd = "workspace"+File.separator+"mpp"+File.separator+"PSBPM.exe \"" + full_filename + "\"";
+          cmd = psbpmTool +" \"" + full_filename + "\"";
           parser.executeSync(cmd);
 
           int dot_index = name.lastIndexOf('.');
@@ -89,7 +102,7 @@ public class UploadServlet extends HttpServlet {
           request.setAttribute("ntask", sta.getNtask());
           request.setAttribute("nreso", sta.getNreso());
           request.setAttribute("ndepd", sta.getNdepd());
-          request.setAttribute("depd_img", "/mpp/upload/" + path_img);
+          request.setAttribute("depd_img", "/upload/" + path_img);
           request.setAttribute("xml_filename", name.substring(0, dot_index)+".xml");
 
           sta.genAssignment(1);
